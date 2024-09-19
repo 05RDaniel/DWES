@@ -11,6 +11,6 @@
     $año = 2005;
     $nombre = "Daniel Rufes";
     ?>
-    <p>Me llamo <?php print $nombre ?> y nací en el año <?php print $año ?>
+    <p>Me llamo <?=$nombre?> y nací en el año <?=$año?>
 </body>
 </html>
