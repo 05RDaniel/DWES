@@ -6,11 +6,12 @@
     <title>Bienvenida</title>
 </head>
 <body>
-    <h1>Ejercicio 1</h1>
+    <h1>Ejercicio 2</h1>
     <?php
-    $año = 2005;
-    $nombre = "Daniel Rufes";
+    define('PI', 3.1416);
+    $radio = 3.5;
+    $area = PI*($radio*$radio);
     ?>
-    <p>Me llamo <?=$nombre?> y nací en el año <?=$año?></p>
+    <p>El area del círculo es <?=$area?></p>
 </body>
 </html>
