@@ -9,21 +9,25 @@
 
 <body>
     <h1>Ejercicio 6</h1>
+    <h3>Cuenta progresiva del 0 al 100</h3>
     <?php
-    for ($i=0;$i<=100;$i++){
-        if ($i==100){
-            echo $i;
-        } else {
-            echo $i,", ";
+    for ($i = 0; $i <= 100; $i++) {
+        echo $i;
+        if ($i != 100) {
+            echo ", ";
         }
     }
-    echo "<br>";
-    $i=10;
-    while ($i>=0){
-        if ($i==0){
-            echo $i;
-        } else {
-            echo $i," - ";
+    ?>
+    
+    <br>
+    <h3>Cuenta regresiva del 10 al 0</h3>
+
+    <?php
+    $i = 10;
+    while ($i >= 0) {
+        echo $i;
+        if ($i != 0) {
+            echo " - ";
         }
         $i--;
     }
