@@ -7,20 +7,24 @@
 </head>
 <body>
     <?php
-    $n1=36;
+    $n1=152;
     $n2=27;
-    function cuenta($a,$b){
+    $n3=1;
+    function cuenta($a,$b,$c){
+        if ($a-$c==$a){
+            $c=1;
+        }
         if($a<$b){
-            for ($a;$a<=$b;$a++){
+            for ($a;$a<$b;$a+=$c){
                 echo $a,"<br>";
             }
         } else if($a>$b){
-            for ($a;$a>=$b;$a--){
+            for ($a;$a>$b;$a-=$c){
                 echo $a,"<br>";
             }
         }
     }
-    cuenta($n1,$n2);
+    cuenta($n1,$n2,$n3);
     ?>
 </body>
 </html>
