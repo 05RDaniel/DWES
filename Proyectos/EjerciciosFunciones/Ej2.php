@@ -20,6 +20,7 @@
             }
         }
     }
+    echo "Del ",$n1," al ",$n2,"<br><br>";
     cuenta($n1,$n2);
     ?>
 </body>
