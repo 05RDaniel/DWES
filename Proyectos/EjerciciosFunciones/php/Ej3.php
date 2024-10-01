@@ -8,8 +8,11 @@
 <body>
     <?php
     include "../inc/Funciones.inc";
-    $nombre="Pablo";
-    saludo($nombre);
+    $a=3;
+    $b=2;
+    echo $a, $b,"<br>";
+    intercambia($a,$b);
+    echo $a, $b;
     ?>
 </body>
 </html>

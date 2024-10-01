@@ -8,8 +8,10 @@
 <body>
     <?php
     include "../inc/Funciones.inc";
-    $nombre="Pablo";
-    saludo($nombre);
+    $precio=85;
+    $descuento=10;
+    $final = calculaDescuento($precio,$descuento);
+    echo $final
     ?>
 </body>
 </html>
