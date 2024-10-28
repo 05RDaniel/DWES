@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="403validacion.php" method="POST">
+        <p>Nombre y apellidos: <input type="text" name="fullname" required /></p>
+        <p>Email: <input type="email" name="email" required /></p>
+        <p>URL página: <input type="text" name="url" /></p>
+        <p>Sexo: 
+            <input type="radio" name="sex" value="Hombre" required /> Hombre
+            <input type="radio" name="sex" value="Mujer" required /> Mujer
+        </p>
+        <p>Nº convivientes domicilio: <input type="number" name="nConv" min="1"/></p>
+        <p>Aficiones: 
+          <input type="checkbox" name="aficiones[]" value="Deporte" /> Deporte
+          <input type="checkbox" name="aficiones[]" value="Leer" /> Leer
+          <input type="checkbox" name="aficiones[]" value="Escribir" /> Escribir
+          <input type="checkbox" name="aficiones[]" value="Gansos" /> Gansos
+        </p>
+        <p>Menú favorito:
+            <select name="menus[]" multiple>
+                <option value="Menú 1">Menú 1</option>
+                <option value="Menú 2">Menú 2</option>
+                <option value="Menú 3">Menú 3</option>
+                <option value="Menú 4">Menú 4</option>
+            </select>
+        </p>
+        <p><input type="submit" value="Enviar"></p>
+      </form>
+  </body>
+</html>
