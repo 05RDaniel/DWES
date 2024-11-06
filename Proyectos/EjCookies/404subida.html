@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-  </head>
-  <body>
-    <form action="404subida.php" method="POST">
-        <p><input type="file" name="file"></p>
-        <p>Altura del archivo:  <input type="number" style="width: 75px;" name="altura" value="0"> px</p>
-        <p>Anchura del archivo:  <input type="number" style="width: 75px;" name="altura" value="0"> px</p>
-        <p><input type="submit" value="Enviar"></p>
-      </form>
-  </body>
+</head>
+<body>
+    <form action="404subida.php" method="POST" enctype="multipart/form-data">
+        <p><input type="file" name="archivoEnviado" /></p>
+        <p>
+            Altura del archivo:
+            <input type="number" style="width: 75px" name="altura" value="0" /> px
+        </p>
+        <p>
+            Anchura del archivo:
+            <input type="number" style="width: 75px" name="anchura" value="0" /> px
+        </p>
+        <p><input type="submit" name="btnSubir" value="Subir" /></p>
+    </form>
+</body>
 </html>

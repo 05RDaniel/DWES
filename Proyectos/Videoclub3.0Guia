@@ -1,0 +1,48 @@
+index: formulario con user/password
+
+login: comprobación del par usuario/contraseña
+    -Si es correcto, carga página principal
+        -Si es admin, muestra mainAdmin
+        -Si es cliente, muestra mainCliente
+    -Si no es correcto, redirije de vuelta a index
+
+main: página principal
+    -Bienvenida
+    -Enlace para cerrar sesión
+    -Comprobación del tipo de ususario (cliente o administrador) para llamar a la página
+    correspondiente
+
+mainAdmin: página principal admin
+    -Listado de clientes
+    -Listado de soportes
+
+mainCliente: página principal admin
+    -Listado alquileres del cliente
+
+Cliente: Modificaciones
+    -Almacenar usuario
+    -Almacenar contraseña
+
+formCreateCliente: dar de alta nuevo cliente
+    -Formulario para insertar datos cliente
+        -Usuario
+        -Contraseña
+        -Nombre
+        -Maximo de alquileres
+
+createCliente: crea un cliente
+    -recibe los datos del formulario y crea un nuevo cliente (nuevo objeto de la clase cliente)
+
+formUpdateCliente: modificar un cliente
+    -Lista con datos del cliente
+    -Formulario para modificar datos cliente
+        -Usuario
+        -Contraseña
+        -Nombre
+        -Maximo de alquileres
+
+updateCliente: modifica un cliente
+    -Recibe los datos del formulario y modifica un cliente existente
+
+removeCliente: elimina un cliente
+    -Elimina un cliente de la lista de clientes
