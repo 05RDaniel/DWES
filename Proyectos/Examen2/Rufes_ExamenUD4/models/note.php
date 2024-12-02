@@ -1,0 +1,1 @@
+<!-- Se me ha olvidado separar la funcionalidad y está todo en el archivo auth.php -->

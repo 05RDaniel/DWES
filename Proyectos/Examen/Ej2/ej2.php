@@ -1,7 +1,5 @@
 <?php
 include_once 'vehiculo.php';
-include_once 'moto.php';
-include_once 'coche.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
