@@ -7,14 +7,14 @@ if ($conexion->connect_errno) {
 }
 
 if ($_POST["origen"] == "crear") {
-    insertarProducto($conexion, $_POST["nombre"], $_POST["precio"]);
+    insertarCompra($conexion, $_POST["nombre"], $_POST["precio"]);
 } elseif ($_POST["origen"] == "eliminar") {
-    eliminarProducto($conexion, $_POST["id"], $_POST["nombre"]);
+    eliminarCompra($conexion, $_POST["id"], $_POST["nombre"]);
 } elseif ($_POST["origen"] == "editar") {
-    editarProducto($conexion, $_POST["id"], $_POST["newnombre"], $_POST["newprecio"]);
+    editarCompra($conexion, $_POST["id"], $_POST["newnombre"], $_POST["newprecio"]);
 }
 
-function eliminarProducto($conexion, $id, $nombre)
+function eliminarCompra($conexion, $id, $nombre)
 {
     $ssql = "DELETE FROM Productos WHERE Id='$id' AND Nombre='$nombre'";
     if ($conexion->query($ssql)) {
@@ -24,7 +24,7 @@ function eliminarProducto($conexion, $id, $nombre)
     }
 }
 
-function insertarProducto($conexion, $nombre, $precio)
+function insertarCompra($conexion, $nombre, $precio)
 {
     $ssql = "INSERT INTO Productos (Id, Nombre, Precio) VALUES (null,'$nombre', '$precio')";
 
@@ -35,7 +35,7 @@ function insertarProducto($conexion, $nombre, $precio)
     }
 }
 
-function editarProducto($conexion, $id, $newnombre, $newprecio){
+function editarCompra($conexion, $id, $newnombre, $newprecio){
     $ssql = "UPDATE Productos SET Nombre='$newnombre', Precio='$newprecio' WHERE Id='$id'";
 
     if ($conexion->query($ssql)) {

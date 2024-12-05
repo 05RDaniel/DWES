@@ -7,9 +7,6 @@
 </head>
 <body>
     <form action="opsClientes.php" method="POST">
-        <label for="id">Id:</label>
-        <input type="text" id="id" name="id" required>
-        <br><br>
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" required>
         <br><br>
