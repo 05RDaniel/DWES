@@ -1,27 +1,55 @@
-<?php
-$conexion = new mysqli("127.0.0.1", "rufes", "1234", "Pruebas");
-if (isset($_POST["product"])) {
-    header("Location:./index.php?result=" . mostrarProductos($conexion)."&product=" . $conexion->query("SELECT Nombre FROM Productos WHERE Id=" . $_POST["product"])->fetch_assoc()["Nombre"]);
-} else {
-    header("Location:./index.php");
-}
+<!DOCTYPE html>
+<html lang="en">
 
-function mostrarProductos($conexion)
-{
-    $finish = "";
-    $i = 0;
-    $ssql = "SELECT * FROM Compras WHERE Id_Producto=" . $_POST["product"];
-    if ($result = $conexion->query($ssql)) {
-        while ($row = $result->fetch_assoc()) {
-            $cliente = $conexion->query("SELECT Nombre FROM Cliente WHERE Id=" . $row["Id_Cliente"])->fetch_assoc()["Nombre"];
-            $finish .= "<tr><td>" . $cliente . "</td><td>" . $row["Fecha"] . "</td><td>" . $row["Cantidad"] . "</td</tr>";
-            $i = 1;
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <?php
+include './db.php';
+$db = new Pruebas;
+$db->createConnection("127.0.0.1", "rufes", "1234", "Pruebas");
+    ?>
+    <form action="./index.php" method="POST">
+        <p>
+            <select id="product" name="product">
+                <?= isset($_GET["product"])?"<option selected>". $_GET["product"] ."</option>":"<option disabled selected>Seleccione un producto</option>"; ?>
+                
+                <?= $db->showProducts(); ?>
+            </select>
+        </p>
+        <input type="submit" value="Ver ventas">
+    </form>
+    <br>
+    <?php
+        if (isset($_GET["product"])) {
+            echo "Ventas de <b>".$_GET["product"]."</b>:<br><br>";
         }
-        $result->free();
-    } else {
-        echo "<p>Error al realizar la consulta: " . $conexion->error . "</p>";
-    }
-    $finish = "<tr><th>Cliente</th><th>Fecha</th><th>Cantidad</th></tr>" . $finish;
-    $i == 0 ? $finish = "<tr><td>No hay ventas registradas</td></tr>" : null;
-    return $finish;
-}
+    ?>
+    <table>
+        <?php
+        if (isset($_GET["result"])) {
+            echo $_GET["result"];
+        } else {
+            echo "<tr><td>Seleccione un producto por favor</td></tr>";
+        }
+        ?>
+    </table>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        table td {
+            border: 1px solid black;
+            width: 100px;
+            height: 50px;
+            text-align: center;
+        }
+    </style>
+</body>
+
+</html>
