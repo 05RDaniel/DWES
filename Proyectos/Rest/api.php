@@ -93,15 +93,12 @@ function handlePut($db, $data)
             if ($db->dataQuery($sql)) {
                 echo json_encode("Producto actualizado con éxito");
             } else {
-                http_response_code(500); // Error interno
                 echo json_encode("Error al actualizar el producto");
             }
         } else {
-            http_response_code(400); // Solicitud incorrecta
             echo json_encode("No se proporcionaron datos para actualizar");
         }
     } else {
-        http_response_code(400); // Solicitud incorrecta
         echo json_encode("ID no proporcionado");
     }
 }
@@ -114,11 +111,9 @@ function handleDelete($db, $data)
         if ($db->dataQuery($sql)) {
             echo json_encode(["message" => "Producto eliminado con éxito"]);
         } else {
-            http_response_code(500); // Error interno
             echo json_encode("Error al eliminar el producto");
         }
     } else {
-        http_response_code(400); // Solicitud incorrecta
         echo json_encode("ID no proporcionado");
     }
 }
