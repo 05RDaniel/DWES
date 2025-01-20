@@ -5,9 +5,10 @@ if (
     isset($_POST["product"])
 ){
     $productoActual = $_POST["product"];
-    $listaCompras = (new DataAccess())->soldByProduct($productoActual); /* listaCompras es toda la información de las compras seleccionadas */
+    $listaCompras = (new DataAccess())->soldByProduct($productoActual);
+    /* listaCompras es toda la información de las compras seleccionadas */
     foreach ($listaCompras as $key){
-        $client = (new DataAccess())->clientById($key["Id_Cliente"]);
+        $client [] = (new DataAccess())->clientById($key["Id_Cliente"]);
     }
 }
 /* productoActual es el NOMBRE del producto actual */

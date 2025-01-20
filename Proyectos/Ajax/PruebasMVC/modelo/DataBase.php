@@ -14,15 +14,12 @@ class DataBase
         if ($this->connection) $this->connection->close();
       }
 
-      public function dataQuery($sql)
-    {
+      public function dataQuery($sql) {
         $res = $this->connection->query($sql);
-        if ($res === true) {
-            return true;
-        } elseif ($res) {
-            return $res->fetch_all(MYSQLI_ASSOC);
-        } else {
-            return false;
+        $resArray = array();
+        if ($res) {
+          $resArray = $res->fetch_all(MYSQLI_ASSOC);
         }
-    }
+        return $resArray;
+      }
 }

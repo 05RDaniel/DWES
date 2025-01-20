@@ -10,26 +10,40 @@
 </head>
 
 <body>
-<form action="../controlador/controlador.php" method="POST">
+    <form action="../controlador/controlador.php" method="POST">
         <p>
             <select id="product" name="product">
-                <?= isset($productoActual)?"<option selected>". $productoActual ."</option>":"<option disabled selected>Seleccione un producto</option>"; ?>
+                <?= isset($productoActual) ? "<option selected>" . $productoActual . "</option>" : "<option disabled selected>Seleccione un producto</option>"; ?>
                 <?php
-                    foreach ($productos as $key) {
-                        echo ("<option>" . $key["Nombre"] . "</option>");
-                    }
+                foreach ($productos as $key) {
+                    echo ("<option>" . $key["Nombre"] . "</option>");
+                }
                 ?>
             </select>
         </p>
         <input type="submit" value="Ver ventas">
     </form>
 
-    <table>
+    <table border="1">
+        <tr>
+            <th>Cliente</th>
+            <th>Cantidad</th>
+            <th>Fecha</th>
+        </tr>
         <?php
-        foreach ($productos as $key) {
-            echo ("<tr><td>" . $key["Nombre"] . "</td><td>" . $key["Precio"] . "</td></tr>");
+        echo "<br>";
+        foreach ($listaCompras as $key) {
+            echo "<tr>";
+            foreach ($client as $key2) {
+                if ($key["Id_Cliente"] == $key2[0]["Id"]) {
+                    echo "<td>".$key2[0]["Nombre"] . "</td>";
+                }
+            }
+            echo "<td>".$key["Cantidad"] . "</td>";
+            echo "<td>".$key["Fecha"] . "</td></tr>";
         }
         ?>
+
     </table>
 
     <style>
