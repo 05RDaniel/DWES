@@ -82,9 +82,6 @@ function handlePut($db, $data)
         if (isset($data["nombre"])) {
             $updates[] = "Nombre = '" . $data["nombre"] . "'";
         }
-        if (isset($data["descripcion"])) {
-            $updates[] = "Descripcion = '" . $data["descripcion"] . "'";
-        }
         if (isset($data["precio"])) {
             $updates[] = "Precio = " . $data["precio"];
         }
@@ -109,7 +106,7 @@ function handleDelete($db, $data)
         $id = (int) $data["id"];
         $sql = "DELETE FROM Productos WHERE Id = $id";
         if ($db->dataQuery($sql)) {
-            echo json_encode(["message" => "Producto eliminado con éxito"]);
+            echo json_encode("Producto eliminado con éxito");
         } else {
             echo json_encode("Error al eliminar el producto");
         }
