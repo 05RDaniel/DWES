@@ -40,7 +40,7 @@
 
     <script>
             addEventListener("change" , function(){
-                var producto = document.getElementById("product").value;
+            var producto = document.getElementById("product").value;
             query_string = "product=" + encodeURIComponent(producto);
 
             peticion_http = new XMLHttpRequest();

@@ -22,72 +22,78 @@
     </table>
 
     <script>
-        // URL base de la API
-        const API_URL = "../controlador";
+        window.onload = function() {
+            cargarProductos();
+        };
 
-        // Cargar productos al cargar la página
-        document.addEventListener("DOMContentLoaded", function () {
-            fetch(`${API_URL}/Controller.php`) // Ruta para obtener todos los productos
-                .then(response => {
-                    if (!response.ok) throw new Error("Error al cargar los productos");
-                    return response.json();
-                })
-                .then(data => {
-                    const select = document.getElementById("product");
-                    data.forEach(product => {
-                        const option = document.createElement("option");
-                        option.value = product.Id; // Suponiendo que "Id" es la clave del producto
-                        option.textContent = product.Nombre; // Suponiendo que "Nombre" es el nombre del producto
-                        select.appendChild(option);
-                    });
-                })
-                .catch(error => console.error("Error al cargar productos: ", error));
-        });
+        function cargarProductos() {
+            var url = "../controlador/API.php"; // Endpoint para obtener productos
+            var peticion_http = new XMLHttpRequest();
 
-        // Manejar el cambio en el select
-        document.getElementById("product").addEventListener("change", function () {
-            const productoId = this.value;
-            if (!productoId) {
-                alert("Por favor, seleccione un producto válido.");
-                return;
-            }
+            peticion_http.onreadystatechange = function() {
+                if (peticion_http.readyState === 4) {
+                    if (peticion_http.status === 200) {
+                        var productos = JSON.parse(peticion_http.responseText);
+                        var opciones = '<option disabled selected>Seleccione un producto</option>';
+                        productos.forEach(function(producto) {
+                            opciones += `<option value="${producto.Id}">${producto.Nombre}</option>`;
+                        });
+                        document.getElementById("product").innerHTML = opciones;
 
-            // Realizar la solicitud para obtener las ventas del producto seleccionado
-            fetch(`${API_URL}/Controller.php?id=${productoId}`)
-                .then(response => {
-                    if (!response.ok) throw new Error("Error al cargar las ventas del producto");
-                    return response.json();
-                })
-                .then(data => {
-                    const ventasTable = document.getElementById("ventas");
-                    ventasTable.innerHTML = generarTabla(data);
-                })
-                .catch(error => console.error("Error al cargar las ventas: ", error));
-        });
+                        // Agregar evento change al select
+                        document.getElementById("product").addEventListener("change", function() {
+                            var idProducto = this.value;
+                            cargarVentas(idProducto);
+                        });
+                    } else {
+                        console.error("Error al cargar productos: " + peticion_http.status);
+                    }
+                }
+            };
 
-        // Generar tabla a partir de datos JSON
-        function generarTabla(data) {
-            if (data.error) {
-                return `<p>${data.error}</p>`;
-            }
+            peticion_http.open("GET", url, true);
+            peticion_http.send();
+        }
 
-            let html = `<table>
+        function cargarVentas(idProducto) {
+            var url = `../controlador/API.php?id=${idProducto}`;
+            var peticion_http = new XMLHttpRequest();
+            var producto = document.getElementById("product").value;
+
+            peticion_http.onreadystatechange = function() {
+                if (peticion_http.readyState === 4) {
+                    if (peticion_http.status === 200) {
+                        da = new DataAccess;
+                        listaCompras = da.soldByProduct(productoActual);
+                        listaCompras.forEach(key=>{
+                            compras = (new DataAccess()).clientById(key["Id_Cliente"]);
+                        });
+                        document.getElementById("ventas").innerHTML = compras
+
+                        /* 
+                        var ventas = JSON.parse(peticion_http.responseText);
+                        var tabla = `
                             <tr>
-                                <th>ID Venta</th>
-                                <th>Producto</th>
-                                <th>Fecha</th>
-                                <th>Cantidad</th>
+                                <th>ID</th>
+                                <th>Nombre</th>
                             </tr>`;
-            data.forEach(venta => {
-                html += `<tr>
-                            <td>${venta.id}</td>
-                            <td>${venta.producto}</td>
-                            <td>${venta.fecha}</td>
-                            <td>${venta.cantidad}</td>
-                         </tr>`;
-            });
-            html += "</table>";
-            return html;
+                        ventas.forEach(venta=> {
+                            console.log(venta)
+                            tabla += `
+                                <tr>
+                                    <td>${venta["Id"]}</td>
+                                    <td>${venta["Nombre"]}</td>
+                                </tr>`;
+                        });
+                        document.getElementById("ventas").innerHTML = tabla; */
+                    } else {
+                        console.error("Error al cargar ventas: " + peticion_http.status);
+                    }
+                }
+            };
+
+            peticion_http.open("GET", url, true);
+            peticion_http.send();
         }
     </script>
 
@@ -95,7 +101,6 @@
         table {
             border: 1px black solid;
             border-collapse: collapse;
-            width: 100%;
         }
 
         table th,
