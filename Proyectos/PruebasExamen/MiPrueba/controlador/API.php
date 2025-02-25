@@ -28,31 +28,15 @@ switch ($requestMethod) {
 
 function handleGet($db, $uri)
 {
-    if (end($uri) === "API.php") {
-        /* Todos los productos */
-        $products = $db->allProducts();
-        echo json_encode($products);
-    } elseif (is_numeric(end($uri))) {
-        /* Producto por la ip */
-        $id = (int) end($uri);
-        $product = $db->productById($id);
-        if ($product) {
-            echo json_encode($product);
-        }  else {
-            echo json_encode(["error" => "Producto no encontrado"]);
-        }
-    } elseif (isset($_GET["id"])) {
-        /* Producto por GET */
-        $id = (int) $_GET["id"];
-        $product = $db->productById($id);
-        if ($product) {
-            echo json_encode($product);
-        }  else {
-            echo json_encode(["error" => "Producto no encontrado"]);
-        }
-    } else {
-        echo json_encode("Ruta no valida");
+    if (isset($_GET["id"])){
+        $res = $db->productById($_GET["id"]);
     }
+    if (is_numeric(end($uri))) {
+        $res = $db->productById(end($uri));
+    } elseif (end($uri) == "API.php"){
+        $res = $db->allProducts();
+    }
+    echo json_encode($res);
 }
 
 function handlePost($db, $data)
@@ -60,8 +44,7 @@ function handlePost($db, $data)
     if (isset($data["nombre"], $data["precio"])) {
         $nombre = $data["nombre"];
         $precio = $data["precio"];
-        $sql = "INSERT INTO Productos (Nombre, Precio) VALUES ('$nombre', $precio)";
-        if ($db->dataQuery($sql)) {
+        if ($db->insertProduct($nombre, $precio)) {
             echo json_encode("Producto creado con exito");
         } else {
             echo json_encode("Error al crear el producto");

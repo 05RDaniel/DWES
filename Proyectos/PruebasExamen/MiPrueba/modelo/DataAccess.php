@@ -39,4 +39,11 @@ class DataAccess
         $db->closeConnection();
         return $product;
     }
+
+    public function insertProduct($nombre, $precio){
+        $db = new DataBase();
+        $db->establishConnection("127.0.0.1", "rufes", "1234", "Pruebas");
+        $db->dataQuery("INSERT INTO Productos (Nombre, Precio) VALUES ('". $nombre . "', ". $precio . ")");
+        $db->closeConnection();
+    }
 }
